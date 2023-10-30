@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>SDE Drag</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="content">
+      <h1>
+        The Blessing of Randomness: SDE Beats ODE in General Diffusion-Based
+        Image Editing
+      </h1>
+      <!-- Authors info here -->
+      <font size="+2">
+        <p style="text-align: center">
+          <a href="" target="_blank">Paper(WIP)</a> &nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="" target="_blank">Code(WIP)</a> &nbsp;&nbsp;&nbsp;&nbsp;
+          <a
+            href="https://drive.google.com/file/d/1YdYareZqFghwUcADrCsJVHr9iBRm_q8Y/view?usp=drive_link"
+            target="_blank"
+            >DragBench</a
+          >
+        </p>
+      </font>
+      <td align="center">
+        <img src="./assets/0_1.jpg" style="width: 24%" />
+        <img src="./assets/0_0.jpg" style="width: 24%" />
+        <img src="./assets/1_1.jpg" style="width: 24%" />
+        <img src="./assets/1_0.jpg" style="width: 24%" />
+        <img src="./assets/2_1.jpg" style="width: 24%" />
+        <img src="./assets/2_0.jpg" style="width: 24%" />
+        <img src="./assets/3_1.jpg" style="width: 24%" />
+        <img src="./assets/3_0.jpg" style="width: 24%" />
+      </td>
+    </div>
+
+    <div class="content">
+      <td align="center">
+        <img src="./assets/girl.gif" style="width: 33%" />
+        <img src="./assets/nature.gif" style="width: 33%" />
+        <img src="./assets/generated.gif" style="width: 33%" />
+        <img src="./assets/plant.gif" style="width: 33%" />
+        <img src="./assets/hill.gif" style="width: 33%" />
+        <img src="./assets/tree.gif" style="width: 33%" />
+      </td>
+    </div>
+
+    <div class="content">
+      <h2 style="text-align: center">Abstract</h2>
+      <p>
+        We present a unified probabilistic formulation for diffusion-based image
+        editing, where a latent variable is edited in a task-specific manner and
+        generally deviates from the corresponding marginal distribution induced
+        by the original stochastic or ordinary differential equation (SDE or
+        ODE). Instead, it defines a corresponding SDE or ODE for editing. In the
+        formulation, we prove that the Kullback-Leibler divergence between the
+        marginal distributions of the two SDEs gradually decreases while that
+        for the ODEs remains as the time approaches zero, which shows the
+        promise of SDE in image editing. Inspired by it, we provide the SDE
+        counterparts for widely used ODE baselines in various tasks including
+        inpainting and image-to-image translation, where SDE shows a consistent
+        and substantial improvement. Moreover, we propose SDE-Drag – a simple
+        yet effective method built upon the SDE formulation for point-based
+        content dragging. We build a challenging benchmark (termed DragBench)
+        with open-set natural, art, and AI-generated images for evaluation. A
+        user study on DragBench indicates that SDE-Drag significantly
+        outperforms our ODE baseline, existing diffusion-based methods, and the
+        renowned DragGAN. Our results demonstrate the superiority and
+        versatility of SDE in image editing and push the boundary of
+        diffusion-based editing methods.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 style="text-align: center">General probabilistic formulation for image editing</h2>
+      <img src="./assets/summary.png" style="width: 100%" />
+      <p>
+        In our formulation, the input image undergoes inversion or noise perturbation first, followed by manipulation or domain
+        transformation to generate a task-specific latent variable. Starting from it, a stochastic differential equation (SDE) or
+        a probability flow ordinary differential equation (ODE) is defined by a pretrained diffusion model.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 style="text-align: center">Toy example</h2>
+      <p>
+        We conduct a toy simulation on the Gaussian mixture data to illustrate our theoretical results
+      (Theorem 3.1, Theorem 3.2 and Proposition D.1) clearer.
+      </p>
+      <img src="./assets/prior.png" style="width: 45%" />
+      <img src="./assets/editing.png" style="width: 53%" />
+      <p>
+        Left panel: Both ODE and SDE samplers match the data if denosing from standard gaussian distribution. Right pannel:  ODE fails to recover the data distribution while SDE succeeds though the prior
+        distribution mismatch with standard gaussian distribution.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 style="text-align: center">Results</h2>
+      <p>
+        <img src="./assets/editing_results.png" style="width: 100%" />
+      </p>
+      <p>
+        We conduct experiments on various tasks including inpainting, image-to-image translation where the SDE counterparts show a consistent
+        and substantial improvement over the ODE baselines. For the quantitate comparison please see the paper.
+      </p>
+      <img src="./assets/sde_lora-ode_lora.png" style="width: 24%" />
+      <img src="./assets/sde_lora-dragdiff.png" style="width: 24%" />
+      <img src="./assets/sde_lora-draggan.png" style="width: 24%" />
+      <img src="./assets/time_efficiency.png" style="width: 24%" />
+      <p>
+        The first three result figures display the preference rates (with 95%
+        confidence intervals) of SDE-Drag relative to ODE-Drag, DragDiffusion,
+        and DragGAN. SDE-Drag significantly outperforms all competitors. The
+        empty box in the third result denotes the proportion of open-domain
+        images in DragBench that DragGAN cannot edit. The fourth result figure
+        shows that the average time cost per image is comparable for all
+        methods.
+      </p>
+    </div>
+
+    <div class="content">
+      <h2 style="text-align: center">Conclusion</h2>
+      <p>
+        We present a unified probabilistic formulation for diffusion-based image
+        editing encompassing a wide range of existing work. We theoretically
+        show the promise of the SDE formulation for general image editing. We
+        propose a simple yet effective dragging algorithm (SDE-Drag) based on
+        the SDE formulation and a challenging benchmark with 100 open-set images
+        for evaluation. Our results in inpainting, image-to-image translation,
+        and dragging clearly demonstrate the superiority and versatility of SDE
+        in general image editing. Notably, SDE-Drag can improve the alignment
+        between the prompt and sample from advanced AI-painting systems like
+        Stable Diffusion and DALL 3.
+      </p>
+    </div>
+
+    <div class="content">
+      <h4>BibTex</h4>
+      <p>WIP</p>
+    </div>
+  </body>
+</html>
